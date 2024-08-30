@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+import java.util.ArrayList;
+
 @SpringBootApplication
 @EnableJpaAuditing
 @EnableAsync
@@ -21,11 +23,24 @@ public class JobPortalApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
 		return args -> {
-			if(roleRepository.findByName("USER").isEmpty()){
-				roleRepository.save(
-						Role.builder().name("USER").build()
-				);
-			}
+			ArrayList<String> userRoles = new ArrayList<>(3);
+			userRoles.add("APPLICANT");
+			userRoles.add("COMPANY");
+			userRoles.add("ADMIN");
+
+            for (String role : userRoles) {
+                if (roleRepository.findByName(role).isEmpty()) {
+                    {
+                        roleRepository.save(
+                                Role.builder().name(role).build()
+                        );
+                    }
+                }
+//            if(roleRepository.findByName("USER").isEmpty()){
+//				roleRepository.save(
+//						Role.builder().name("USER").build()
+//				);
+            }
 		};
 	}
 
