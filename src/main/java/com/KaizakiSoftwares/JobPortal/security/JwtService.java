@@ -19,12 +19,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * This class is responsible for generating and validating JWT tokens.
+ * It uses the io.jsonwebtoken library to generate and validate tokens.
+ */
+
 @Service
 public class JwtService {
 
     @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;
-   // @Value("${application.security.jwt.secret-key}")
+    @Value("${application.security.jwt.secret-key}")
     private String secretKey;
 
 
@@ -89,22 +94,22 @@ public class JwtService {
     }
 
     private Key getSignInKey(){
-//        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-//        return Keys.hmacShaKeyFor(keyBytes);
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes);
 
-        // Generate a 256-bit key
-        Key key = null;
-        try {
-            key = KeyGenerator.getInstance("HmacSHA256").generateKey();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+//        // Generate a 256-bit key
+//        Key key = null;
+//        try {
+//            key = KeyGenerator.getInstance("HmacSHA256").generateKey();
+//        } catch (NoSuchAlgorithmException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        // Convert the key to a format suitable for JWT signing
+//        byte[] encodedKey = key.getEncoded();
+//        SecretKey secretKey = new SecretKeySpec(encodedKey, 0, encodedKey.length, "HmacSHA256");
 
-        // Convert the key to a format suitable for JWT signing
-        byte[] encodedKey = key.getEncoded();
-        SecretKey secretKey = new SecretKeySpec(encodedKey, 0, encodedKey.length, "HmacSHA256");
-
-        return secretKey;
+  //      return secretKey;
     }
 
 }

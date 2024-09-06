@@ -17,6 +17,19 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This Is the Model class for user
+ * this class is implemented UserDetails and Principal
+ * Spring security UserDetails is implemented to allow the user to be used in the security context
+ * Principal is implemented to allow the user to be used as a principal in the security context
+ * Method getNames() is from Principal interface
+ * Other methods are from UserDetails interface
+ * In user class, The email is unique identifier of the user
+ * You can use fullName() method to get the full name of the user
+ * "@EntityListeners(AuditingEntityListener.class)" is used to enable auditing for the user entity
+ * if you use it, remember to enable @JpaAuditing in the main class
+ */
+
 @Getter
 @Setter
 @Builder

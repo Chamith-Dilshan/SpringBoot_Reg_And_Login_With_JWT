@@ -11,6 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * The BeansConfig class is responsible for creating the beans that are required for the application.
+ * Here we have created the beans for the AuthenticationProvider, AuthenticationManager, and PasswordEncoder.
+ */
+
 @Configuration
 @RequiredArgsConstructor
 public class BeansConfig {

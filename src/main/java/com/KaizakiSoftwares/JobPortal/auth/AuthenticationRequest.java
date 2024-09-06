@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This Is the Model class for user Log in request
+ */
 @Getter
 @Setter
 @Builder

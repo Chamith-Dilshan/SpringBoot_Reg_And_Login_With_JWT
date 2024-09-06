@@ -23,6 +23,13 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This Service class is responsible for handling all the business logic related to
+ * User Registration, User Authentication and Account Activation.
+ * Here Assign a role to a user and save the user to the database
+ * and send an activation email to the user.
+ */
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -54,10 +61,10 @@ public class AuthenticationService {
                 .roles(List.of(userRole))
                 .build();
         userRepository.save(user);
-        sendvalidationEmail(user);
+        sendValidationEmail(user);
     }
 
-    private void sendvalidationEmail(User user) throws MessagingException {
+    private void sendValidationEmail(User user) throws MessagingException {
         var newToken = generateAndSaveActivationToken(user);
         //send email
         emailService.sendEmail(
@@ -109,14 +116,14 @@ public class AuthenticationService {
                 .token(jwtToken).build();
     }
 
-    @Transactional
+    //@Transactional
     public void activateAccount(String token) throws MessagingException {
         Token savedToken = tokenRepository.findByToken(token)
                 //todo exception has to be defined
                 .orElseThrow(() -> new RuntimeException("Invalid token"));
 
         if(LocalDateTime.now().isAfter(savedToken.getExpiresAt())){
-            sendvalidationEmail(savedToken.getUser());
+            sendValidationEmail(savedToken.getUser());
             throw new RuntimeException("Activation token has expired. A new token has been sent");
         }
 

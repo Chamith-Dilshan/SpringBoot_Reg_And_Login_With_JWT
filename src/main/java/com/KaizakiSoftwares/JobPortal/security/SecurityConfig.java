@@ -16,6 +16,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+/**
+ * The SecurityConfig class is responsible for configuring the security of the application.
+ * "@EnableWebSecurity" annotation is used because we have role-based access control in our application.
+ * Here it will permit all the requests to the "/auth/**" and "/v2/spi-docs" endpoints.
+ * and all other requests will be authenticated.
+ * and also we have disabled the csrf and session management.
+ * here add a filter before the UsernamePasswordAuthenticationFilter called jwtAuthFilter.
+ */
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -52,16 +61,16 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/v1/**")
-                        .allowedOrigins("http://localhost:3000")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/api/v1/**")
+//                        .allowedOrigins("http://localhost:3000")
+//                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+//            }
+//        };
+//    }
 
 }

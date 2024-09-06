@@ -17,6 +17,18 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * The JwtFilter class is responsible for filtering the requests.
+ * It extends the OncePerRequestFilter class that will make this a filter.
+ * Here it will check if the request is for the "/api/v1/auth" endpoint then it will permit the request.
+ * If the request is not for the "/api/v1/auth" endpoint then it will extract the jwt token from the request header.
+ * It will extract the user email from the jwt token.
+ * It will check if the user email is not null and the SecurityContextHolder context authentication is null.
+ * It will load the user by email from the database.
+ * It will check if the jwt token is valid.
+ * It will create an authentication token and set the authentication token in the SecurityContextHolder context.
+ */
+
 @Service
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {

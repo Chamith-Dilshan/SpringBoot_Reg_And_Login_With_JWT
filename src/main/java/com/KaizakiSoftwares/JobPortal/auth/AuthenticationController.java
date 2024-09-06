@@ -9,6 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * This Controller class is responsible for handling all the incoming requests related to
+ * User Registration, User Authentication and Account Activation.
+ */
+
 @RestController
 @RequestMapping("auth")
 @RequiredArgsConstructor
