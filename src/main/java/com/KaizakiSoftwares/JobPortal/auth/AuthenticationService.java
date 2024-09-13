@@ -134,4 +134,24 @@ public class AuthenticationService {
         savedToken.setValidatedAt(LocalDateTime.now());
         tokenRepository.save(savedToken);
     }
+
+    public boolean validateToken(String token) {
+        try {
+            Token savedToken = tokenRepository.findByToken(token)
+                    .orElseThrow(() -> new RuntimeException("Invalid token"));
+
+            User user = userRepository.findById(savedToken.getUser().getId())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+            return true; // Token and user are valid
+        } catch (UsernameNotFoundException e) {
+            // Handle user not found exception
+            e.printStackTrace();
+            return false; // Return false if user is not found
+        } catch (RuntimeException e) {
+            // Handle any other runtime exceptions
+            e.printStackTrace();
+            return false; // Return false for other runtime exceptions
+        }
+    }
 }
