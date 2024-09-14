@@ -36,16 +36,18 @@ spring:
       group-id: authGroup
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       #to trust a package
-#      properties:
-#        spring.json.trusted.packages: com.SpringReactive.kafka.payload
+      properties:
+        spring.json.trusted.packages: com.KaizakiSoftwares.JobPortal.payLoad
+
+    #this part is only for producer application
     producer:
       bootstrap-servers: localhost:9092
-      group-id: authGroup
-      auto-offset-reset: earliest
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      #value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 #  mail:
 #    host: smtp.gmail.com
